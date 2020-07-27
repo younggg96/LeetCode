@@ -1,5 +1,6 @@
 package tree;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,20 +23,20 @@ class Node {
 };
 */
 
-public class NAryTreePreorderTraversal {
-    public List<Integer> preorder(Node root) {
+public class NAryTreePostorderTraversal {
+    public List<Integer> postorder(Node root) {
         List<Integer> list = new ArrayList<>();
         return dfs(list, root);
     }
     
     private List<Integer> dfs(List<Integer> list, Node node) {
         if(node != null) {
-            list.add(node.val);
             if(node.children != null) {
                 for(Node child: node.children) {
                     dfs(list, child);
                 }
             }
+            list.add(node.val);
         }
         return list;
     }
