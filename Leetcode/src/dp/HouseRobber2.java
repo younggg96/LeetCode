@@ -1,5 +1,7 @@
 package dp;
 
+import java.util.Arrays;
+
 // You are a professional robber planning to rob houses along a street. 
 // Each house has a certain amount of money stashed. All houses at this place are arranged in a circle. 
 // That means the first house is the neighbor of the last one. Meanwhile, adjacent houses have security system connected and 
@@ -24,6 +26,18 @@ package dp;
 
 public class HouseRobber2 {
     public int rob(int[] nums) {
-        
+        if(nums.length == 0) return 0;
+        if(nums.length == 1) return nums[0];
+        return Math.max(myRob(Arrays.copyOfRange(nums, 0, nums.length - 1)), 
+                        myRob(Arrays.copyOfRange(nums, 1, nums.length)));
+    }
+    private int myRob(int[] nums) {
+        int pre = 0, cur = 0, tmp;
+        for(int num : nums) {
+            tmp = cur;
+            cur = Math.max(pre + num, cur);
+            pre = tmp;
+        }
+        return cur;
     }
 }
